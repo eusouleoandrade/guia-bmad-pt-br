@@ -1,0 +1,1387 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Guia prático em português para aprender BMad Method, agentes, artefatos, comandos e fluxo por stories."
+    />
+    <title>BMAD sem mistério — Guia prático</title>
+    <style>
+      :root {
+        --ink: #17211f;
+        --muted: #60706b;
+        --paper: #f7f4ec;
+        --card: #fffdf8;
+        --line: #d9d9ce;
+        --brand: #0d6655;
+        --brand-dark: #08483c;
+        --accent: #e87531;
+        --blue: #287aa0;
+        --purple: #785b9d;
+        --shadow: 0 14px 38px rgba(23, 33, 31, 0.08);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        color: var(--ink);
+        background:
+          radial-gradient(circle at 10% 0%, rgba(232, 117, 49, 0.13), transparent 26rem),
+          radial-gradient(circle at 95% 18%, rgba(13, 102, 85, 0.12), transparent 28rem),
+          var(--paper);
+        font-family:
+          Inter,
+          ui-sans-serif,
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          'Segoe UI',
+          sans-serif;
+        line-height: 1.6;
+      }
+
+      a {
+        color: var(--brand);
+      }
+      code,
+      .command {
+        font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
+      }
+      code {
+        padding: 0.12rem 0.35rem;
+        border-radius: 0.35rem;
+        background: #e9eee9;
+        font-size: 0.9em;
+      }
+
+      .hero {
+        padding: 5.5rem max(1.25rem, calc((100vw - 1120px) / 2)) 4rem;
+      }
+      .eyebrow {
+        margin: 0 0 0.75rem;
+        color: var(--accent);
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+      h1 {
+        max-width: 820px;
+        margin: 0;
+        font-family: Georgia, 'Times New Roman', serif;
+        font-size: clamp(3rem, 8vw, 6.4rem);
+        line-height: 0.94;
+        letter-spacing: -0.055em;
+      }
+      .lead {
+        max-width: 720px;
+        margin: 1.6rem 0 0;
+        color: var(--muted);
+        font-size: clamp(1.1rem, 2vw, 1.35rem);
+      }
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        margin-top: 2rem;
+      }
+      .button {
+        display: inline-flex;
+        align-items: center;
+        min-height: 44px;
+        padding: 0.7rem 1rem;
+        border: 1px solid var(--brand);
+        border-radius: 999px;
+        background: var(--brand);
+        color: white;
+        font-weight: 750;
+        text-decoration: none;
+      }
+      .button.secondary {
+        background: transparent;
+        color: var(--brand);
+      }
+
+      .nav {
+        position: sticky;
+        z-index: 10;
+        top: 0;
+        overflow-x: auto;
+        padding: 0.65rem max(1rem, calc((100vw - 1120px) / 2));
+        border-block: 1px solid rgba(13, 102, 85, 0.15);
+        background: rgba(247, 244, 236, 0.92);
+        backdrop-filter: blur(14px);
+        white-space: nowrap;
+      }
+      .nav a {
+        margin-right: 1rem;
+        color: var(--ink);
+        font-size: 0.9rem;
+        font-weight: 750;
+        text-decoration: none;
+      }
+
+      main {
+        width: min(1120px, calc(100% - 2rem));
+        margin: 0 auto;
+      }
+      section {
+        padding: 4.5rem 0;
+        border-top: 1px solid var(--line);
+        scroll-margin-top: 4rem;
+      }
+      .section-head {
+        display: grid;
+        grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.25fr);
+        gap: 2rem;
+        margin-bottom: 2rem;
+      }
+      h2 {
+        margin: 0;
+        font-family: Georgia, 'Times New Roman', serif;
+        font-size: clamp(2rem, 5vw, 3.5rem);
+        line-height: 1;
+      }
+      h3 {
+        margin-top: 0;
+        font-size: 1.08rem;
+      }
+      .section-head p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 1.08rem;
+      }
+
+      .callout {
+        padding: 1.5rem;
+        border-left: 5px solid var(--accent);
+        border-radius: 0.75rem;
+        background: var(--card);
+        box-shadow: var(--shadow);
+      }
+      .callout strong {
+        color: var(--brand-dark);
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1rem;
+      }
+      .card {
+        padding: 1.25rem;
+        border: 1px solid var(--line);
+        border-radius: 1rem;
+        background: var(--card);
+        box-shadow: 0 8px 22px rgba(23, 33, 31, 0.04);
+      }
+      .card p:last-child {
+        margin-bottom: 0;
+      }
+      .tag {
+        display: inline-block;
+        margin-bottom: 0.65rem;
+        padding: 0.2rem 0.55rem;
+        border-radius: 999px;
+        background: #dfece7;
+        color: var(--brand-dark);
+        font-size: 0.75rem;
+        font-weight: 850;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+      .tag.optional {
+        background: #fae7d7;
+        color: #853d15;
+      }
+      .tag.anytime {
+        background: #e6e2ef;
+        color: #513a70;
+      }
+
+      .flow {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 0.8rem;
+        counter-reset: phase;
+      }
+      .phase {
+        position: relative;
+        min-height: 235px;
+        padding: 1.25rem;
+        border-radius: 1rem;
+        background: var(--card);
+        border-top: 7px solid var(--brand);
+      }
+      .phase:nth-child(2) {
+        border-color: var(--accent);
+      }
+      .phase:nth-child(3) {
+        border-color: var(--blue);
+      }
+      .phase:nth-child(4) {
+        border-color: var(--purple);
+      }
+      .phase::before {
+        counter-increment: phase;
+        content: '0' counter(phase);
+        position: absolute;
+        top: 0.7rem;
+        right: 1rem;
+        color: #cbd1cc;
+        font:
+          800 2rem Georgia,
+          serif;
+      }
+      .phase ul {
+        padding-left: 1.1rem;
+      }
+
+      .pipeline {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.5rem;
+        margin-top: 1.2rem;
+      }
+      .pipeline span {
+        padding: 0.55rem 0.75rem;
+        border: 1px solid var(--line);
+        border-radius: 0.6rem;
+        background: var(--card);
+        font-weight: 750;
+      }
+      .pipeline b {
+        color: var(--accent);
+      }
+
+      .agent-card {
+        border-top: 5px solid var(--brand);
+      }
+      .agent-card:nth-child(2n) {
+        border-color: var(--accent);
+      }
+      .agent-card:nth-child(3n) {
+        border-color: var(--blue);
+      }
+      .agent-name {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 1rem;
+      }
+      .agent-name strong {
+        overflow-wrap: anywhere;
+      }
+      .agent-name strong {
+        color: var(--muted);
+        font-size: 0.82rem;
+      }
+
+      .artifact {
+        display: grid;
+        grid-template-columns: 12rem 1fr;
+        gap: 1rem;
+      }
+      .artifact + .artifact {
+        margin-top: 0.75rem;
+      }
+      .artifact dt,
+      .artifact dd {
+        margin: 0;
+      }
+      .artifact dt {
+        font-weight: 850;
+      }
+      .artifact dd {
+        color: var(--muted);
+      }
+
+      .search-wrap {
+        margin-bottom: 1rem;
+      }
+      .search-status {
+        min-height: 1.6em;
+        margin: 0.45rem 0 0;
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+      #command-search {
+        width: 100%;
+        padding: 0.9rem 1rem;
+        border: 1px solid var(--line);
+        border-radius: 0.8rem;
+        background: white;
+        color: var(--ink);
+        font: inherit;
+      }
+      .command-list {
+        display: grid;
+        gap: 0.65rem;
+      }
+      .command-row {
+        display: grid;
+        grid-template-columns: minmax(15rem, 0.7fr) 1fr auto;
+        gap: 1rem;
+        align-items: center;
+        padding: 0.9rem 1rem;
+        border: 1px solid var(--line);
+        border-radius: 0.8rem;
+        background: var(--card);
+      }
+      .command {
+        color: var(--brand-dark);
+        font-weight: 800;
+        overflow-wrap: anywhere;
+      }
+      .command-row p {
+        margin: 0;
+        color: var(--muted);
+      }
+      .command-meta {
+        grid-column: 1 / -1;
+        color: var(--muted);
+        font-size: 0.78rem;
+        font-weight: 750;
+      }
+      .copy {
+        min-height: 38px;
+        padding: 0.45rem 0.7rem;
+        border: 1px solid var(--brand);
+        border-radius: 0.55rem;
+        background: transparent;
+        color: var(--brand);
+        cursor: pointer;
+        font-weight: 750;
+      }
+      .copy:hover,
+      .copy:focus {
+        background: var(--brand);
+        color: white;
+      }
+
+      .story-loop {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 0.55rem;
+      }
+      .story-step {
+        min-height: 135px;
+        padding: 0.85rem;
+        border-radius: 0.8rem;
+        background: var(--brand-dark);
+        color: white;
+      }
+      .story-step b {
+        display: block;
+        color: #9fe0ce;
+        font-size: 1.35rem;
+      }
+      .story-step code {
+        display: inline-block;
+        margin-top: 0.45rem;
+        background: rgba(255, 255, 255, 0.12);
+        color: white;
+      }
+
+      details {
+        margin-top: 0.75rem;
+        padding: 0.85rem 1rem;
+        border: 1px solid var(--line);
+        border-radius: 0.8rem;
+        background: var(--card);
+      }
+      summary {
+        cursor: pointer;
+        font-weight: 800;
+      }
+      .training {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+      }
+      .training ol {
+        padding-left: 1.2rem;
+      }
+      footer {
+        padding: 3rem 1rem 5rem;
+        color: var(--muted);
+        text-align: center;
+      }
+
+      @media (max-width: 900px) {
+        .grid,
+        .flow {
+          grid-template-columns: 1fr 1fr;
+        }
+        .story-loop {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+      @media (max-width: 620px) {
+        .section-head,
+        .grid,
+        .flow,
+        .training {
+          grid-template-columns: 1fr;
+        }
+        .story-loop {
+          grid-template-columns: 1fr 1fr;
+        }
+        .artifact {
+          grid-template-columns: 1fr;
+          gap: 0.15rem;
+        }
+        .command-row {
+          grid-template-columns: 1fr;
+        }
+        .copy {
+          width: 100%;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+      }
+      @media print {
+        .nav,
+        .hero-actions,
+        .search-wrap,
+        .copy {
+          display: none !important;
+        }
+        body {
+          background: white;
+        }
+        .card,
+        .callout,
+        .command-row,
+        .story-step,
+        details {
+          break-inside: avoid;
+        }
+        .command-row[hidden] {
+          display: grid !important;
+        }
+        .card,
+        .callout {
+          box-shadow: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="hero">
+      <p class="eyebrow">Referência consultável • BMad Method 6.10.0 • Português do Brasil</p>
+      <h1>BMAD sem mistério.</h1>
+      <p class="lead">
+        Entenda o sistema, escolha caminho proporcional ao trabalho e consulte agentes, workflows,
+        entradas e resultados. Base auditada: catálogo local BMad Method 6.10.0.
+      </p>
+      <div class="hero-actions">
+        <a class="button" href="#inicio">Começar em 5 minutos</a>
+        <a class="button secondary" href="#comandos">Consultar comandos</a>
+        <a class="button secondary" href="https://github.com/eusouleoandrade/guia-bmad-pt-br/issues"
+          >Reportar erro</a
+        >
+      </div>
+    </header>
+
+    <nav class="nav" aria-label="Navegação do guia">
+      <a href="#inicio">Instalação</a><a href="#tracks">Caminhos</a
+      ><a href="#decisao">O que chamar?</a><a href="#visao">Visão geral</a><a href="#fluxo">Fluxo</a
+      ><a href="#artefatos">Artefatos</a><a href="#agentes">Agentes</a><a href="#comandos">Skills</a
+      ><a href="#story">Ciclo da story</a><a href="#treinamento">Treinamento</a
+      ><a href="#fontes">Fontes</a>
+    </nav>
+
+    <main>
+      <section id="inicio">
+        <div class="section-head">
+          <h2>Comece aqui</h2>
+          <p>
+            BMAD é instalado dentro do projeto. Depois, você chama uma skill pelo nome no chat do
+            Codex. Não precisa iniciar agente antes do workflow.
+          </p>
+        </div>
+        <div class="grid">
+          <article class="card">
+            <span class="tag">1. Terminal</span>
+            <h3>Entre no projeto</h3>
+            <p><code>cd caminho/do/projeto</code></p>
+          </article>
+          <article class="card">
+            <span class="tag">2. Instalar</span>
+            <h3>Instale BMAD</h3>
+            <p><code>npx bmad-method install</code></p>
+            <p>Escolha módulo <strong>BMad Method</strong> durante instalação.</p>
+          </article>
+          <article class="card">
+            <span class="tag">3. Codex</span>
+            <h3>Peça orientação</h3>
+            <p><code>$bmad-help o que faço primeiro?</code></p>
+          </article>
+        </div>
+        <div class="callout" style="margin-top: 1rem">
+          <strong>Pré-requisitos:</strong> Node.js 20.12 ou superior. Git é recomendado para
+          versionar artefatos e código. O comando acima instala a versão estável corrente; equipes
+          que exigem reprodutibilidade devem fixar uma versão compatível no próprio projeto.
+        </div>
+        <div class="callout" style="margin-top: 1rem">
+          <strong>Escopo desta referência:</strong> nomes, precedências e outputs foram conferidos
+          no catálogo local <strong>6.10.0</strong>. Outra instalação pode mudar skills, menus e
+          nomes de arquivo; consulte <code>$bmad-help</code> e o catálogo do próprio projeto.
+        </div>
+        <div class="callout" style="margin-top: 1rem">
+          <strong>Como chamar:</strong> abra Codex dentro do projeto e escreva comando no chat.
+          Exemplo: <code>$bmad-prd crie um PRD para meu aplicativo</code>. Prefixo
+          <code>$</code> seleciona skill; texto depois informa objetivo.
+        </div>
+        <details>
+          <summary>O que instalação cria?</summary>
+          <p>
+            <code>_bmad/</code> guarda sistema, configuração e catálogo de workflows.
+            <code>_bmad-output/</code> receberá documentos produzidos. Skills disponíveis também
+            aparecem em <code>.agents/skills/</code>. Você trabalha principalmente com comandos e
+            outputs; não precisa decorar internals.
+          </p>
+        </details>
+      </section>
+
+      <section id="tracks">
+        <div class="section-head">
+          <h2>Três caminhos</h2>
+          <p>
+            BMAD não obriga todo trabalho a produzir PRD e arquitetura. Escolha processo conforme
+            incerteza, risco e alcance; contagens de stories são sinais, não limites rígidos.
+          </p>
+        </div>
+        <div class="grid">
+          <article class="card">
+            <span class="tag">Quick Flow</span>
+            <h3>Intenção clara, mudança delimitada</h3>
+            <p>
+              <strong>Quando:</strong> existe um único objetivo claro e implementável, mesmo que ele
+              envolva feature, refactor ou vários arquivos. Coordenação e incerteza definem o track;
+              tamanho sozinho não limita a skill.
+            </p>
+            <p><strong>Entrada:</strong> pedido concreto, restrições e contexto do repositório.</p>
+            <p><strong>Resultado:</strong> spec proporcional, implementação e revisão.</p>
+            <p><code>$bmad-quick-dev</code></p>
+          </article>
+          <article class="card">
+            <span class="tag">BMad Method</span>
+            <h3>Produto ou mudança com coordenação</h3>
+            <p><strong>Quando:</strong> requisitos, UX e decisões técnicas precisam permanecer alinhados.</p>
+            <p><strong>Entrada:</strong> ideia, brief ou conhecimento de produto existente.</p>
+            <p><strong>Resultado:</strong> planejamento, arquitetura, backlog e loop por story.</p>
+            <p><code>$bmad-help</code> indica ponto de entrada.</p>
+          </article>
+          <article class="card">
+            <span class="tag">Enterprise</span>
+            <h3>Escala, governança e integração</h3>
+            <p><strong>Quando:</strong> várias equipes, compliance, sistemas legados ou dependências amplas.</p>
+            <p><strong>Entrada:</strong> contexto organizacional, restrições e arquitetura existente.</p>
+            <p><strong>Resultado:</strong> processo BMad adaptado, com gates e artefatos adicionais.</p>
+            <p>Capacidades dependem dos módulos instalados.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="decisao">
+        <div class="section-head">
+          <h2>O que chamar?</h2>
+          <p>
+            Primeiro classifique tamanho da mudança. Depois chame workflow direto. Agente serve para
+            conversar quando você ainda não sabe exatamente qual entrega precisa.
+          </p>
+        </div>
+        <div class="callout">
+          <strong>Regra simples:</strong> objetivo claro = workflow. Problema ainda confuso = agente
+          ou <code>$bmad-help</code>. Vários pontos de vista = <code>$bmad-party-mode</code>.
+        </div>
+        <div class="grid" style="margin-top: 1rem">
+          <article class="card">
+            <span class="tag">Mudança pequena</span>
+            <h3>“Trocar cor do botão”</h3>
+            <p>Não precisa PRD, arquiteto ou nova story formal.</p>
+            <p><code>$bmad-quick-dev troque a cor do botão primário para azul</code></p>
+          </article>
+          <article class="card">
+            <span class="tag">Story já existe</span>
+            <h3>“Implementar Story 2.3”</h3>
+            <p>Use ciclo de implementação existente.</p>
+            <p><code>$bmad-dev-story implemente a Story 2.3</code></p>
+          </article>
+          <article class="card">
+            <span class="tag">Nova funcionalidade</span>
+            <h3>“Adicionar login”</h3>
+            <p>
+              Se login afeta produto, segurança, UX ou várias equipes, atualize requisitos e impacto
+              técnico. Se for trabalho autônomo já especificado, Quick Dev pode bastar.
+            </p>
+            <p><code>$bmad-help</code> decide entre <code>$bmad-prd</code> e <code>$bmad-quick-dev</code>.</p>
+          </article>
+          <article class="card">
+            <span class="tag">Ideia confusa</span>
+            <h3>“Quero criar produto, não sei como”</h3>
+            <p>Comece explorando problema e público.</p>
+            <p><code>$bmad-agent-analyst</code> ou <code>$bmad-product-brief</code></p>
+          </article>
+          <article class="card">
+            <span class="tag">Decisão técnica</span>
+            <h3>“Monólito ou microserviços?”</h3>
+            <p>Converse com arquiteto; formalize depois na arquitetura.</p>
+            <p><code>$bmad-agent-architect</code></p>
+          </article>
+          <article class="card">
+            <span class="tag">Não sei</span>
+            <h3>“Qual próximo passo?”</h3>
+            <p>Help lê artefatos e status existentes.</p>
+            <p><code>$bmad-help</code></p>
+          </article>
+        </div>
+        <details>
+          <summary>Quando usar story em vez de Quick Dev?</summary>
+          <p>
+            Use story quando trabalho já pertence a épico/sprint, precisa seguir backlog ou depende
+            da continuidade entre stories. Use Quick Dev para objetivo autônomo e claro, inclusive
+            quando atravessa vários arquivos. Risco, incerteza e coordenação podem justificar voltar
+            ao planejamento antes de qualquer dos dois.
+          </p>
+        </details>
+      </section>
+
+      <section id="visao">
+        <div class="section-head">
+          <h2>Modelo mental</h2>
+          <p>
+            BMAD é sistema modular de agentes especializados, skills e workflows guiados que
+            transformam intenção em artefatos persistentes e trabalho verificável. Não é modelo de
+            IA, IDE, gerenciador de projetos nem garantia automática de qualidade.
+          </p>
+        </div>
+        <div class="callout">
+          <strong>Frase para memorizar:</strong> pessoa define intenção; workflow conduz processo;
+          agente aplica especialidade; artefato guarda decisão; próxima etapa consome esse artefato.
+        </div>
+        <div class="grid" style="margin-top: 1rem">
+          <article class="card">
+            <span class="tag">Agente</span>
+            <h3>Quem pensa</h3>
+            <p>
+              Persona especializada: PM, arquiteto, desenvolvedor, UX, analista ou redator técnico.
+            </p>
+          </article>
+          <article class="card">
+            <span class="tag">Workflow</span>
+            <h3>Como trabalha</h3>
+            <p>Sequência disciplinada: PRD, arquitetura, criar story, desenvolver, revisar.</p>
+          </article>
+          <article class="card">
+            <span class="tag">Artefato</span>
+            <h3>O que permanece</h3>
+            <p>Arquivo criado no disco. Sobrevive à troca de chat e alimenta próximos workflows.</p>
+          </article>
+          <article class="card">
+            <span class="tag">Skill</span>
+            <h3>Capacidade invocável</h3>
+            <p>Pacote de instruções que ativa agente, workflow ou ferramenta para objetivo específico.</p>
+          </article>
+          <article class="card">
+            <span class="tag">Ação de menu</span>
+            <h3>Operação dentro do agente</h3>
+            <p>Atalho como criar, validar ou explicar. Não é necessariamente skill independente.</p>
+          </article>
+        </div>
+        <details>
+          <summary>Agente e workflow são a mesma coisa?</summary>
+          <p>
+            Não. Você pode chamar workflow diretamente, como <code>$bmad-prd</code>. Também pode
+            chamar agente, como <code>$bmad-agent-pm</code>, para conversar com persona e acessar
+            menu dela. Para execução previsível, prefira workflow direto.
+          </p>
+        </details>
+        <details>
+          <summary>Por que abrir novo chat para cada workflow?</summary>
+          <p>
+            Cada workflow carrega contexto próprio. Chat novo reduz ruído, evita limite de contexto
+            e deixa revisão independente de implementação. Arquivos permanecem no projeto; nada
+            precisa ser reexplicado.
+          </p>
+        </details>
+      </section>
+
+      <section id="fluxo">
+        <div class="section-head">
+          <h2>Quatro fases</h2>
+          <p>
+            Este é fluxo canônico do track BMad Method. Itens marcados obrigatórios são gates desse
+            track; Quick Flow segue caminho proporcional e não exige todos eles.
+          </p>
+        </div>
+        <div class="flow">
+          <article class="phase">
+            <span class="tag optional">Opcional</span>
+            <h3>Análise</h3>
+            <p><strong>Objetivo:</strong> descobrir problema e validar ideia.</p>
+            <ul>
+              <li><strong>Chame:</strong> Mary ou workflows de pesquisa</li>
+              <li><strong>Comando:</strong> <code>$bmad-product-brief</code></li>
+              <li><strong>Saída:</strong> visão curta do produto</li>
+            </ul>
+          </article>
+          <article class="phase">
+            <span class="tag">Gate: PRD</span>
+            <h3>Planejamento</h3>
+            <p><strong>Objetivo:</strong> definir o que construir e para quem.</p>
+            <ul>
+              <li><strong>Chame:</strong> <code>$bmad-prd</code></li>
+              <li><strong>Depois:</strong> <code>$bmad-ux</code>, se houver UI</li>
+              <li><strong>Saída:</strong> requisitos e experiência</li>
+            </ul>
+          </article>
+          <article class="phase">
+            <span class="tag">Obrigatória</span>
+            <h3>Solutioning</h3>
+            <p><strong>Objetivo:</strong> decidir como construir e dividir trabalho.</p>
+            <ul>
+              <li><strong>Chame:</strong> <code>$bmad-architecture</code></li>
+              <li><strong>Depois:</strong> epics/stories e implementation readiness</li>
+              <li><strong>Saída:</strong> arquitetura, backlog e relatório de prontidão</li>
+            </ul>
+          </article>
+          <article class="phase">
+            <span class="tag">Obrigatória</span>
+            <h3>Implementação</h3>
+            <p><strong>Objetivo:</strong> construir e validar story por story.</p>
+            <ul>
+              <li><strong>Comece:</strong> sprint planning e sprint status</li>
+              <li><strong>Por story:</strong> criar, validar, desenvolver e revisar</li>
+              <li><strong>Saída:</strong> sprint status, stories, código e testes</li>
+            </ul>
+          </article>
+        </div>
+        <div class="pipeline" aria-label="Fluxo de artefatos">
+          <span>Ideia</span><b>›</b><span>Brief opcional</span><b>›</b><span>PRD</span><b>›</b
+          ><span>UX se aplicável</span><b>›</b><span>Arquitetura</span><b>›</b><span>Épicos</span><b>›</b
+          ><span>Readiness</span><b>›</b><span>Sprint plan</span><b>›</b><span>Stories</span
+          ><b>›</b><span>Código</span>
+        </div>
+      </section>
+
+      <section id="artefatos">
+        <div class="section-head">
+          <h2>Arquivos sem confusão</h2>
+          <p>
+            Pense em cada arquivo como resposta para uma pergunta. Se pergunta muda, artefato
+            correspondente deve ser atualizado antes do código.
+          </p>
+        </div>
+        <dl>
+          <div class="artifact card">
+            <dt><code>planning-artifacts/</code></dt>
+            <dd>
+              <strong>Decisões antes da execução.</strong> Brief, pesquisas, PRD, UX, arquitetura,
+              épicos/stories e readiness ficam na pasta configurada como
+              <code>planning_artifacts</code>. Nomes exatos podem variar por versão e workflow.
+            </dd>
+          </div>
+          <div class="artifact card">
+            <dt><code>implementation-artifacts/</code></dt>
+            <dd>
+              <strong>Pacotes e rastreamento da execução.</strong> Sprint status, specs, stories,
+              relatórios de validação, testes e retrospectivas ficam na pasta configurada como
+              <code>implementation_artifacts</code>.
+            </dd>
+          </div>
+          <div class="artifact card">
+            <dt><code>docs/</code></dt>
+            <dd>
+              <strong>Conhecimento durável do projeto.</strong> Documentação brownfield, pesquisas e
+              explicações podem ir para pasta configurada como <code>project_knowledge</code>; nesta
+              instalação, valor é <code>{project-root}/docs</code>.
+            </dd>
+          </div>
+          <div class="artifact card">
+            <dt>Brief, PRD e UX</dt>
+            <dd>
+              <strong>Por quê, o quê e como a experiência funciona?</strong> Entram ideia e pesquisa;
+              saem visão, requisitos e especificação de experiência. UX é recomendada quando UI é central.
+            </dd>
+          </div>
+          <div class="artifact card">
+            <dt>Arquitetura, épicos e readiness</dt>
+            <dd>
+              <strong>Como manter coerência e dividir valor?</strong> Requisitos alimentam arquitetura;
+              arquitetura alimenta backlog; readiness verifica alinhamento antes do sprint.
+            </dd>
+          </div>
+          <div class="artifact card">
+            <dt><code>project-context.md</code></dt>
+            <dd>
+              <strong>Quais regras agentes nunca devem esquecer?</strong> Stack, convenções, testes
+              e padrões locais. Constituição curta para implementação.
+            </dd>
+          </div>
+          <div class="artifact card">
+            <dt><code>sprint-status.yaml</code> <small>(6.10.0 local)</small></dt>
+            <dd>
+              <strong>Onde estamos?</strong> Estados de épicos e stories: backlog, ready-for-dev,
+              in-progress, review e done.
+            </dd>
+          </div>
+          <div class="artifact card">
+            <dt>Arquivo de story</dt>
+            <dd>
+              <strong>Qual pacote implementar agora?</strong> Critérios de aceite, tarefas, contexto
+              técnico, testes, arquivos e registro do agente. Nome depende do identificador e da versão.
+            </dd>
+          </div>
+          <div class="artifact card">
+            <dt>Relatórios e testes</dt>
+            <dd>
+              <strong>O trabalho está pronto?</strong> Validação de story, code review, checkpoint e
+              QA produzem achados ou suites conforme workflow; alguns atualizam artefato existente.
+            </dd>
+          </div>
+        </dl>
+        <div class="callout" style="margin-top: 1rem">
+          <strong>Duas pastas:</strong> <code>_bmad/</code> guarda sistema, skills e configuração;
+          <code>_bmad-output/</code> guarda entregáveis produzidos para seu projeto. Normalmente
+          você lê e versiona outputs; não edita internals sem workflow de customização.
+        </div>
+        <div class="grid" style="margin-top: 1rem">
+          <article class="card">
+            <span class="tag">PRD</span>
+            <h3>Documento do produto</h3>
+            <p>
+              <em>Product Requirements Document</em>. Explica problema, usuários, funcionalidades,
+              regras e sucesso. Diz <strong>o que</strong> construir; não detalha código.
+            </p>
+          </article>
+          <article class="card">
+            <span class="tag">Project Context</span>
+            <h3>Manual dos agentes</h3>
+            <p>
+              <code>project-context.md</code> registra stack, padrões, comandos e proibições. Diz
+              <strong>como trabalhar neste repositório</strong>. Não substitui PRD ou arquitetura.
+            </p>
+          </article>
+          <article class="card">
+            <span class="tag">Story</span>
+            <h3>Pacote executável</h3>
+            <p>
+              Recorte pequeno com objetivo, critérios de aceite e contexto técnico. Deve ser
+              implementável sem carregar todo histórico do projeto.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section id="agentes">
+        <div class="section-head">
+          <h2>Quem chamar</h2>
+          <p>
+            Use agente para conversa especializada. Use workflow direto quando objetivo já está
+            claro.
+          </p>
+        </div>
+        <div class="grid">
+          <article class="card agent-card">
+            <div class="agent-name">
+              <h3>Mary — Analista</h3>
+              <strong>$bmad-agent-analyst</strong>
+            </div>
+            <p>
+              Explora problema, mercado, domínio, viabilidade e brief. Chame quando ainda pergunta
+              “vale construir?”
+            </p>
+            <p><strong>Resultado:</strong> pesquisa, brief, PRFAQ ou documentação em planning/project knowledge.</p>
+          </article>
+          <article class="card agent-card">
+            <div class="agent-name">
+              <h3>John — Product Manager</h3>
+              <strong>$bmad-agent-pm</strong>
+            </div>
+            <p>
+              Define produto, PRD, escopo, épicos e mudanças. Chame quando pergunta “o que entrega
+              valor?”
+            </p>
+            <p><strong>Resultado:</strong> requisitos e backlog em planning artifacts.</p>
+          </article>
+          <article class="card agent-card">
+            <div class="agent-name">
+              <h3>Sally — UX Designer</h3>
+              <strong>$bmad-agent-ux-designer</strong>
+            </div>
+            <p>
+              Planeja experiência, interação, estados e acessibilidade. Chame quando interface é
+              parte central.
+            </p>
+            <p><strong>Resultado:</strong> especificações visual e comportamental de UX.</p>
+          </article>
+          <article class="card agent-card">
+            <div class="agent-name">
+              <h3>Winston — Arquiteto</h3>
+              <strong>$bmad-agent-architect</strong>
+            </div>
+            <p>
+              Define decisões técnicas e trade-offs. Chame quando pergunta “como manter solução
+              coerente?”
+            </p>
+            <p><strong>Resultado:</strong> architecture spine e avaliação de readiness.</p>
+          </article>
+          <article class="card agent-card">
+            <div class="agent-name">
+              <h3>Amelia — Desenvolvedora</h3>
+              <strong>$bmad-agent-dev</strong>
+            </div>
+            <p>Implementa e testa stories. Code review é workflow separado, idealmente em novo contexto.</p>
+            <p><strong>Resultado:</strong> código, testes, stories e status de implementação.</p>
+          </article>
+          <article class="card agent-card">
+            <div class="agent-name">
+              <h3>Paige — Tech Writer</h3>
+              <strong>$bmad-agent-tech-writer</strong>
+            </div>
+            <p>
+              Escreve, explica, diagrama e valida documentação. Chame para conteúdo técnico
+              ensinável.
+            </p>
+            <p><strong>Resultado:</strong> documentos, explicações, validações e diagramas Mermaid.</p>
+          </article>
+        </div>
+        <details>
+          <summary>Quero todos debatendo comigo</summary>
+          <p>
+            Use <code>$bmad-party-mode</code>. Bom para trade-offs, brainstorming e retrospectiva.
+            Não substitui workflow formal de PRD, arquitetura ou implementação.
+          </p>
+        </details>
+      </section>
+
+      <section id="comandos">
+        <div class="section-head">
+          <h2>Catálogo de skills</h2>
+          <p>
+            Nome canônico é <code>bmad-*</code>. Nesta interface Codex, escreva <code>$bmad-*</code>
+            para selecionar skill explicitamente. Outras ferramentas podem oferecer slash command,
+            menu ou descoberta automática. Cada item mostra propósito; marcador informa categoria e
+            momento. Resultados detalhados aparecem nas seções de fluxo e artefatos.
+          </p>
+        </div>
+        <div class="search-wrap">
+          <label for="command-search">Buscar comando</label
+          ><input
+            id="command-search"
+            type="search"
+            placeholder="Ex.: story, arquitetura, ajuda, documentação…"
+            aria-describedby="command-search-status"
+          />
+          <p id="command-search-status" class="search-status" role="status" aria-live="polite"></p>
+        </div>
+        <div class="command-list" id="command-list">
+          <div class="command-row" data-search="ajuda orientação anytime">
+            <span class="command">$bmad-help</span>
+            <p>Lê estado do projeto e indica próximo passo.</p>
+            <button class="copy">Copiar</button>
+          </div>
+          <div class="command-row" data-search="brainstorm ideia análise opcional">
+            <span class="command">$bmad-brainstorming</span>
+            <p>Facilita geração e organização de ideias.</p>
+            <button class="copy">Copiar</button>
+          </div>
+          <div class="command-row" data-search="forjar ideia pressão validar análise opcional">
+            <span class="command">$bmad-forge-idea</span>
+            <p>Pressiona uma ideia até ela se provar, melhorar ou ser descartada cedo.</p>
+            <button class="copy">Copiar</button>
+          </div>
+          <div class="command-row" data-search="pesquisa mercado clientes concorrentes análise">
+            <span class="command">$bmad-market-research</span>
+            <p>Pesquisa mercado, clientes e concorrentes.</p>
+            <button class="copy">Copiar</button>
+          </div>
+          <div class="command-row" data-search="pesquisa domínio indústria análise">
+            <span class="command">$bmad-domain-research</span>
+            <p>Pesquisa domínio, setor e regras relevantes.</p>
+            <button class="copy">Copiar</button>
+          </div>
+          <div class="command-row" data-search="pesquisa técnica tecnologia arquitetura análise">
+            <span class="command">$bmad-technical-research</span>
+            <p>Pesquisa tecnologias e opções de arquitetura.</p>
+            <button class="copy">Copiar</button>
+          </div>
+          <div class="command-row" data-search="brief produto análise opcional">
+            <span class="command">$bmad-product-brief</span>
+            <p>Resume visão do produto antes do PRD.</p>
+            <button class="copy">Copiar</button>
+          </div>
+          <div class="command-row" data-search="prfaq working backwards ideia análise opcional">
+            <span class="command">$bmad-prfaq</span>
+            <p>Pressiona conceito pelo olhar do cliente.</p>
+            <button class="copy">Copiar</button>
+          </div>
+          <div class="command-row" data-search="prd requisitos planejamento obrigatório">
+            <span class="command">$bmad-prd</span>
+            <p>Cria, atualiza ou valida requisitos do produto.</p>
+            <button class="copy">Copiar</button>
+          </div>
+          <div class="command-row" data-search="ux design experiência interface planejamento">
+            <span class="command">$bmad-ux</span>
+            <p>Define experiência visual e comportamental.</p>
+            <button class="copy">Copiar</button>
+          </div>
+          <div class="command-row" data-search="spec especificação contrato intenção planejamento">
+            <span class="command">$bmad-spec</span>
+            <p>Transforma intenção em contrato verificável para trabalho posterior.</p>
+            <button class="copy">Copiar</button>
+          </div>
+          <div class="command-row" data-search="arquitetura solutioning obrigatório">
+            <span class="command">$bmad-architecture</span>
+            <p>Cria espinha de decisões e invariantes técnicas.</p>
+            <button class="copy">Copiar</button>
+          </div>
+          <div class="command-row" data-search="épicos stories solutioning obrigatório">
+            <span class="command">$bmad-create-epics-and-stories</span>
+            <p>Transforma requisitos em unidades de valor implementáveis.</p>
+            <button class="copy">Copiar</button>
+          </div>
+          <div
+            class="command-row"
+            data-search="readiness prontidão validar alinhamento solutioning"
+          >
+            <span class="command">$bmad-check-implementation-readiness</span>
+            <p>Valida alinhamento entre PRD, UX, arquitetura e stories.</p>
+            <button class="copy">Copiar</button>
+          </div>
+          <div class="command-row" data-search="sprint planejamento implementação status">
+            <span class="command">$bmad-sprint-planning</span>
+            <p>Cria rastreamento do sprint.</p>
+            <button class="copy">Copiar</button>
+          </div>
+          <div class="command-row" data-search="status sprint risco próximo">
+            <span class="command">$bmad-sprint-status</span>
+            <p>Resume andamento, riscos e próxima ação.</p>
+            <button class="copy">Copiar</button>
+          </div>
+          <div class="command-row" data-search="criar validar story implementação ação menu">
+            <span class="command">$bmad-create-story</span>
+            <p>
+              Após sprint planning: ação <code>create</code> prepara próxima story; ação
+              <code>validate</code> verifica completude antes do desenvolvimento.
+            </p>
+            <button class="copy">Copiar</button>
+          </div>
+          <div class="command-row" data-search="desenvolver implementar story código testes">
+            <span class="command">$bmad-dev-story implemente a Story 1.4</span>
+            <p>Implementa critérios de aceite e testes.</p>
+            <button class="copy">Copiar</button>
+          </div>
+          <div class="command-row" data-search="revisar code review story qualidade">
+            <span class="command">$bmad-code-review revise a Story 1.4</span>
+            <p>Revisão adversarial independente.</p>
+            <button class="copy">Copiar</button>
+          </div>
+          <div class="command-row" data-search="checkpoint revisão humana visualizar mudança">
+            <span class="command">$bmad-checkpoint-preview</span>
+            <p>Conduz revisão humana focada de uma mudança.</p>
+            <button class="copy">Copiar</button>
+          </div>
+          <div class="command-row" data-search="crítica socrática red team aprofundar">
+            <span class="command">$bmad-advanced-elicitation</span>
+            <p>Reconsidera e aprofunda uma saída recente com método crítico.</p>
+            <button class="copy">Copiar</button>
+          </div>
+          <div class="command-row" data-search="automático autônomo unattended dev auto">
+            <span class="command">$bmad-dev-auto</span>
+            <p>Executa uma iteração autônoma do loop de desenvolvimento.</p>
+            <button class="copy">Copiar</button>
+          </div>
+          <div class="command-row" data-search="qa e2e automação teste">
+            <span class="command">$bmad-qa-generate-e2e-tests</span>
+            <p>Gera testes API/E2E para funcionalidade existente.</p>
+            <button class="copy">Copiar</button>
+          </div>
+          <div class="command-row" data-search="retrospectiva épico lições">
+            <span class="command">$bmad-retrospective</span>
+            <p>Extrai aprendizados no fim do épico.</p>
+            <button class="copy">Copiar</button>
+          </div>
+          <div class="command-row" data-search="mudança escopo correção rota">
+            <span class="command">$bmad-correct-course</span>
+            <p>Gerencia mudança relevante durante sprint.</p>
+            <button class="copy">Copiar</button>
+          </div>
+          <div class="command-row" data-search="contexto projeto regras brownfield">
+            <span class="command">$bmad-generate-project-context</span>
+            <p>Captura regras do código para todos agentes.</p>
+            <button class="copy">Copiar</button>
+          </div>
+          <div class="command-row" data-search="documentar projeto brownfield">
+            <span class="command">$bmad-document-project</span>
+            <p>Documenta projeto existente para contexto.</p>
+            <button class="copy">Copiar</button>
+          </div>
+          <div class="command-row" data-search="rápido quick dev bug alteração pequena">
+            <span class="command">$bmad-quick-dev</span>
+            <p>De intenção a código: esclarece, planeja, implementa, revisa e apresenta.</p>
+            <button class="copy">Copiar</button>
+          </div>
+          <div class="command-row" data-search="grupo agentes debate party mode">
+            <span class="command">$bmad-party-mode</span>
+            <p>Reúne personas para discussão multiagente.</p>
+            <button class="copy">Copiar</button>
+          </div>
+          <div class="command-row" data-search="customizar override skill agente workflow core">
+            <span class="command">$bmad-customize</span>
+            <p>Cria overrides persistentes para comportamento instalado.</p>
+            <button class="copy">Copiar</button>
+          </div>
+          <div class="command-row" data-search="revisão adversarial crítica geral core">
+            <span class="command">$bmad-review-adversarial-general</span>
+            <p>Produz revisão cínica e achados acionáveis de qualquer artefato.</p>
+            <button class="copy">Copiar</button>
+          </div>
+          <div class="command-row" data-search="edge case casos limite branches revisão core">
+            <span class="command">$bmad-review-edge-case-hunter</span>
+            <p>Varre caminhos e limites; retorna casos não tratados.</p>
+            <button class="copy">Copiar</button>
+          </div>
+          <div class="command-row" data-search="editorial prosa texto copy review core">
+            <span class="command">$bmad-editorial-review-prose</span>
+            <p>Aponta problemas de clareza, gramática e comunicação.</p>
+            <button class="copy">Copiar</button>
+          </div>
+          <div class="command-row" data-search="editorial estrutura reorganizar cortar documento core">
+            <span class="command">$bmad-editorial-review-structure</span>
+            <p>Propõe cortes e reorganização preservando compreensão.</p>
+            <button class="copy">Copiar</button>
+          </div>
+          <div class="command-row" data-search="índice docs documentação pasta core">
+            <span class="command">$bmad-index-docs</span>
+            <p>Cria ou atualiza índice dos documentos de uma pasta.</p>
+            <button class="copy">Copiar</button>
+          </div>
+          <div class="command-row" data-search="shard dividir documento markdown core">
+            <span class="command">$bmad-shard-doc</span>
+            <p>Divide Markdown grande em arquivos menores organizados por seção.</p>
+            <button class="copy">Copiar</button>
+          </div>
+        </div>
+        <details>
+          <summary>Workflows BMM, ferramentas core e ações de menu</summary>
+          <p>
+            <strong>Workflows BMM</strong> criam ou validam entregáveis do método, como PRD,
+            arquitetura, sprint e story. <strong>Ferramentas core</strong> ajudam em qualquer fase,
+            como help, brainstorming, party mode e revisões editoriais. <strong>Ações de menu</strong>
+            são operações internas de agente/skill: na versão 6.10.0, Create Story oferece
+            <code>create</code> e <code>validate</code>; Tech Writer oferece escrever, validar,
+            explicar e gerar Mermaid. Ação não deve ser contada como skill separada.
+          </p>
+        </details>
+        <details>
+          <summary>Aliases depreciados no 6.10.0</summary>
+          <p>
+            <code>bmad-create-prd</code>, <code>bmad-edit-prd</code> e <code>bmad-validate-prd</code>
+            foram consolidados em <code>bmad-prd</code>. <code>bmad-create-architecture</code> foi
+            consolidado em <code>bmad-architecture</code>. Existem por compatibilidade e têm remoção
+            prevista no v7; use nomes canônicos novos.
+          </p>
+        </details>
+      </section>
+
+      <section id="story">
+        <div class="section-head">
+          <h2>Loop por story</h2>
+          <p>
+            Depois de readiness e sprint planning, este é fluxo diário. Validação de story é
+            recomendada no 6.10.0 e code review pode gerar correção e nova rodada.
+          </p>
+        </div>
+        <div class="story-loop">
+          <div class="story-step"><b>1</b>Criar contexto focado<code>$bmad-create-story</code></div>
+          <div class="story-step"><b>2</b>Validar prontidão<code>$bmad-create-story valide</code></div>
+          <div class="story-step"><b>3</b>Implementar e testar<code>$bmad-dev-story</code></div>
+          <div class="story-step"><b>4</b>Revisar independente<code>$bmad-code-review</code></div>
+          <div class="story-step"><b>5</b>Corrigir e concluir<code>$bmad-dev-story</code></div>
+        </div>
+        <div class="callout" style="margin-top: 1rem">
+          <strong>Regra de ouro:</strong> nova janela de contexto para cada workflow. Não rode dois
+          workflows que editam mesmos arquivos em paralelo. Commit depois de revisão e testes.
+        </div>
+      </section>
+
+      <section id="treinamento">
+        <div class="section-head">
+          <h2>Plano para ensinar</h2>
+          <p>
+            Mais eficiente: 30% conceito, 70% demonstração. Mostre artefatos surgindo e sendo
+            consumidos; não apresente catálogo inteiro de memória.
+          </p>
+        </div>
+        <div class="training">
+          <article class="card">
+            <span class="tag">60 minutos</span>
+            <h3>Aula enxuta</h3>
+            <ol>
+              <li>Instalar e chamar primeira skill — 8 min</li>
+              <li>Agente versus workflow — 8 min</li>
+              <li>Quatro fases, responsáveis e outputs — 12 min</li>
+              <li>Decidir entre quick dev, story e planejamento — 12 min</li>
+              <li>Demonstração + dúvidas — 20 min</li>
+            </ol>
+          </article>
+          <article class="card">
+            <span class="tag">90 minutos</span>
+            <h3>Workshop prático</h3>
+            <ol>
+              <li>Conteúdo da aula enxuta — 45 min</li>
+              <li>Grupo escolhe pequena funcionalidade — 10 min</li>
+              <li>Criar ou validar story — 15 min</li>
+              <li>Simular revisão — 10 min</li>
+              <li>Debrief: onde cada artefato ajudou — 10 min</li>
+            </ol>
+          </article>
+        </div>
+        <div class="callout" style="margin-top: 1rem">
+          <strong>Material recomendado:</strong> use este HTML como mapa e consulta. Para aprender
+          de verdade, repita loop completo numa feature pequena. Documentação oficial serve como
+          referência, não como primeira aula.
+        </div>
+      </section>
+
+      <section id="fontes">
+        <div class="section-head">
+          <h2>Fontes oficiais</h2>
+          <p>
+            Fonte primária: catálogos e configuração BMad 6.10.0 instalados neste repositório.
+            Documentação oficial complementa conceitos e pode refletir release diferente.
+          </p>
+        </div>
+        <div class="grid">
+          <article class="card">
+            <h3>Getting Started</h3>
+            <p>Instalação, fases, chats novos e primeiros passos.</p>
+            <a href="https://docs.bmad-method.org/tutorials/getting-started/">Abrir documentação</a>
+          </article>
+          <article class="card">
+            <h3>Workflow Map</h3>
+            <p>Fases, dependências, outputs e gestão de contexto.</p>
+            <a href="https://docs.bmad-method.org/reference/workflow-map/">Abrir documentação</a>
+          </article>
+          <article class="card">
+            <h3>Agents</h3>
+            <p>Personas, skills, menus e responsabilidades.</p>
+            <a href="https://docs.bmad-method.org/reference/agents/">Abrir documentação</a>
+          </article>
+        </div>
+        <details>
+          <summary>Versão e responsabilidade</summary>
+          <p>
+            Guia versão <strong>1.1.0</strong>, preparado com base no catálogo local
+            <strong>BMad Method 6.10.0</strong> e na documentação oficial consultada em julho de 2026. O instalador
+            sem versão explícita usa a release estável corrente; confirme compatibilidade ao
+            atualizar. Material educacional independente e não oficial. BMAD Method e GitHub
+            pertencem aos respectivos titulares.
+          </p>
+        </details>
+        <details>
+          <summary>Histórico de mudanças</summary>
+          <p>
+            <strong>1.1.0 — 13/07/2026:</strong> referência ampliada com tracks, fluxo completo,
+            pastas configuráveis, distinção entre agentes/skills/menus e catálogo 6.10.0.<br />
+            <strong>1.0.0 — 13/07/2026:</strong> primeira versão pública; instalação, decisão entre
+            agente e workflow, quatro fases, artefatos, catálogo de comandos, ciclo por story e
+            plano de treinamento.
+          </p>
+        </details>
+      </section>
+    </main>
+
+    <footer>
+      BMAD sem mistério v1.1.0 • Base auditada: BMad Method 6.10.0 • Atualizado em 13/07/2026
+    </footer>
+    <script>
+      const search = document.querySelector('#command-search');
+      const rows = [...document.querySelectorAll('.command-row')];
+      const searchStatus = document.querySelector('#command-search-status');
+
+      const phaseFor = (searchTerms) => {
+        if (searchTerms.includes('análise')) return 'Workflow BMM • Fase 1: análise';
+        if (searchTerms.includes('planejamento')) return 'Workflow BMM • Fase 2: planejamento';
+        if (searchTerms.includes('solutioning')) return 'Workflow BMM • Fase 3: solutioning';
+        if (searchTerms.includes('implementação')) return 'Workflow BMM • Fase 4: implementação';
+        if (searchTerms.includes('core')) return 'Ferramenta core • qualquer fase';
+        return 'Utilitário • qualquer fase';
+      };
+
+      const normalize = (value) =>
+        value
+          .normalize('NFD')
+          .replace(/\p{Diacritic}/gu, '')
+          .toLocaleLowerCase('pt-BR')
+          .trim();
+
+      const updateSearchStatus = (visibleCount, hasTerm) => {
+        searchStatus.textContent = hasTerm
+          ? visibleCount === 0
+            ? 'Nenhum comando encontrado. Tente outro termo.'
+            : `${visibleCount} ${visibleCount === 1 ? 'comando encontrado' : 'comandos encontrados'}.`
+          : `${rows.length} comandos disponíveis.`;
+      };
+
+      search.addEventListener('input', () => {
+        const term = normalize(search.value);
+        let visibleCount = 0;
+        rows.forEach((row) => {
+          const text = normalize(`${row.dataset.search} ${row.textContent}`);
+          row.hidden = term !== '' && !text.includes(term);
+          if (!row.hidden) visibleCount += 1;
+        });
+        updateSearchStatus(visibleCount, term !== '');
+      });
+
+      document.querySelectorAll('.copy').forEach((button) => {
+        const command = button.parentElement.querySelector('.command').textContent.trim();
+        button.setAttribute('aria-label', `Copiar ${command}`);
+
+        button.addEventListener('click', async () => {
+          button.disabled = true;
+          try {
+            if (!navigator.clipboard?.writeText) throw new Error('Clipboard API indisponível');
+            await navigator.clipboard.writeText(command);
+            searchStatus.textContent = `${command} copiado.`;
+            button.textContent = 'Copiado';
+            window.setTimeout(() => {
+              button.textContent = 'Copiar';
+              button.disabled = false;
+            }, 1200);
+          } catch {
+            searchStatus.textContent = `Não foi possível copiar ${command}. Selecione o comando e copie manualmente.`;
+            button.textContent = 'Falhou';
+            window.setTimeout(() => {
+              button.textContent = 'Copiar';
+              button.disabled = false;
+            }, 1800);
+          }
+        });
+      });
+
+      rows.forEach((row) => {
+        const meta = document.createElement('span');
+        meta.className = 'command-meta';
+        meta.textContent = phaseFor(normalize(row.dataset.search));
+        row.append(meta);
+      });
+
+      updateSearchStatus(rows.length, false);
+    </script>
+  </body>
+</html>
