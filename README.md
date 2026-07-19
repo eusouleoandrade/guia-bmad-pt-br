@@ -11,17 +11,28 @@ Após habilitar GitHub Pages:
 
 Também é possível abrir `index.html` diretamente no navegador.
 
+## Protótipos de layout
+
+Abra [`prototypes/index.html`](prototypes/index.html) para comparar três direções visuais:
+
+- **Command Center:** painel operacional escuro e denso.
+- **Learning Path:** jornada editorial guiada.
+- **Agent Universe:** exploração visual por agentes e relações.
+
+**Learning Path** é agora o layout oficial em `index.html`. Layout anterior permanece arquivado em
+[`prototypes/00-classic-reference.html`](prototypes/00-classic-reference.html).
+
 ## Conteúdo
 
 - Instalação do BMad Method.
-- Como chamar skills no Codex.
+- Como chamar skills em ferramentas de IA compatíveis.
 - Diferença entre agente, skill, workflow, ação de menu e artefato.
 - Como escolher entre Quick Flow, BMad Method e Enterprise.
 - Quatro fases do método.
-- PRD, Project Context, UX, arquitetura, épicos, stories e readiness.
-- Catálogo pesquisável de funcionalidades e aliases depreciados.
+- Agentes e suas responsabilidades.
+- Catálogo pesquisável de skills essenciais.
 - Ciclo completo: sprint planning, criação, validação, implementação e revisão por story.
-- Roteiros de treinamento de 60 e 90 minutos.
+- Referência clássica preservada para consulta do conteúdo detalhado anterior.
 
 ## Publicar no GitHub Pages
 

@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Três propostas modernas de layout para o guia BMAD sem mistério." />
+    <title>Laboratório de layouts — BMAD sem mistério</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #080b12;
+        --panel: #111621;
+        --ink: #f5f7fb;
+        --muted: #9da8b8;
+        --line: #283143;
+        --lime: #b9ff66;
+        --blue: #71b7ff;
+        --violet: #bca7ff;
+      }
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        background:
+          radial-gradient(circle at 15% 0%, rgba(113, 183, 255, .12), transparent 28rem),
+          radial-gradient(circle at 92% 20%, rgba(188, 167, 255, .1), transparent 28rem),
+          var(--bg);
+        color: var(--ink);
+        font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+      }
+      a { color: inherit; }
+      .topbar {
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+        width: min(1240px, calc(100% - 2rem));
+        margin: 0 auto;
+        padding: 1.1rem 0;
+      }
+      .topbar a { color: var(--muted); text-decoration: none; }
+      .topbar strong { letter-spacing: -.03em; }
+      header {
+        width: min(1240px, calc(100% - 2rem));
+        margin: 0 auto;
+        padding: clamp(4rem, 10vw, 8rem) 0 4rem;
+      }
+      .kicker {
+        margin: 0 0 1rem;
+        color: var(--lime);
+        font: 700 .76rem ui-monospace, monospace;
+        letter-spacing: .15em;
+        text-transform: uppercase;
+      }
+      h1 {
+        max-width: 960px;
+        margin: 0;
+        font-size: clamp(3rem, 8vw, 7rem);
+        line-height: .9;
+        letter-spacing: -.075em;
+      }
+      .lead {
+        max-width: 700px;
+        margin: 1.7rem 0 0;
+        color: var(--muted);
+        font-size: clamp(1.05rem, 2vw, 1.35rem);
+        line-height: 1.6;
+      }
+      main {
+        display: grid;
+        gap: 2rem;
+        width: min(1240px, calc(100% - 2rem));
+        margin: 0 auto;
+        padding-bottom: 6rem;
+      }
+      article {
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 1.5rem;
+        background: rgba(17, 22, 33, .78);
+        box-shadow: 0 24px 80px rgba(0, 0, 0, .22);
+      }
+      .preview {
+        position: relative;
+        height: min(50vw, 620px);
+        min-height: 330px;
+        overflow: hidden;
+        border-bottom: 1px solid var(--line);
+        background: #05070b;
+      }
+      iframe {
+        width: 1600px;
+        height: 1000px;
+        border: 0;
+        transform: scale(.775);
+        transform-origin: top left;
+        pointer-events: none;
+      }
+      .details {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 2rem;
+        align-items: end;
+        padding: clamp(1.25rem, 3vw, 2rem);
+      }
+      .number { color: var(--muted); font: 700 .78rem ui-monospace, monospace; }
+      h2 { margin: .5rem 0; font-size: clamp(1.7rem, 4vw, 3rem); letter-spacing: -.045em; }
+      .details p { max-width: 720px; margin: 0; color: var(--muted); line-height: 1.55; }
+      .open {
+        display: inline-flex;
+        align-items: center;
+        min-height: 46px;
+        padding: .75rem 1rem;
+        border-radius: 999px;
+        background: var(--ink);
+        color: var(--bg);
+        font-weight: 800;
+        text-decoration: none;
+      }
+      .open:hover { background: var(--lime); }
+      .open:focus-visible, .topbar a:focus-visible { outline: 3px solid var(--blue); outline-offset: 4px; }
+      footer { width: min(1240px, calc(100% - 2rem)); margin: 0 auto; padding: 2rem 0; color: var(--muted); }
+      @media (max-width: 900px) {
+        .preview { height: 430px; }
+        iframe { transform: scale(.55); }
+      }
+      @media (max-width: 640px) {
+        .details { grid-template-columns: 1fr; }
+        .open { justify-content: center; }
+        .preview { height: 350px; }
+        iframe { transform: scale(.4); }
+      }
+      @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+    </style>
+  </head>
+  <body>
+    <nav class="topbar" aria-label="Navegação">
+      <strong>BMAD sem mistério / Lab</strong>
+      <a href="../index.html">Voltar ao layout atual</a>
+    </nav>
+    <header>
+      <p class="kicker">Três direções • um mesmo conteúdo</p>
+      <h1>Escolha como aprender BMAD.</h1>
+      <p class="lead">Cada protótipo transforma fases, agentes e artefatos em narrativa visual própria. Abra, role, pesquise e compare.</p>
+    </header>
+    <main>
+      <article>
+        <div class="preview" aria-hidden="true"><iframe src="01-command-center.html" loading="lazy" title="Prévia Command Center" tabindex="-1"></iframe></div>
+        <div class="details">
+          <div><span class="number">01 / OPERACIONAL</span><h2>Command Center</h2><p>Painel escuro, denso e direto. Fases viram sistema operacional; progresso e comandos ficam sempre próximos.</p></div>
+          <a class="open" href="01-command-center.html">Abrir protótipo</a>
+        </div>
+      </article>
+      <article>
+        <div class="preview" aria-hidden="true"><iframe src="02-learning-path.html" loading="lazy" title="Prévia Learning Path" tabindex="-1"></iframe></div>
+        <div class="details">
+          <div><span class="number">02 / EDITORIAL</span><h2>Learning Path</h2><p>Leitura clara e progressiva. Caminhos, fases e loop por story formam jornada guiada para quem está começando.</p></div>
+          <a class="open" href="02-learning-path.html">Abrir protótipo</a>
+        </div>
+      </article>
+      <article>
+        <div class="preview" aria-hidden="true"><iframe src="03-agent-universe.html" loading="lazy" title="Prévia Agent Universe" tabindex="-1"></iframe></div>
+        <div class="details">
+          <div><span class="number">03 / EXPLORATÓRIO</span><h2>Agent Universe</h2><p>Ecossistema visual e interativo. Agentes orbitam método; filtros revelam responsabilidades, fases e skills.</p></div>
+          <a class="open" href="03-agent-universe.html">Abrir protótipo</a>
+        </div>
+      </article>
+    </main>
+    <footer>Protótipos locais • conteúdo baseado no guia BMad Method 6.10.0</footer>
+  </body>
+</html>
